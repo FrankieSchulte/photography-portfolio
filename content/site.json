@@ -1,0 +1,426 @@
+{
+  "meta": {
+    "name": "Frankie Schulte",
+    "shortName": "FS",
+    "role": "Photographer",
+    "location": "Your city / region",
+    "email": "your-email@example.com",
+    "instagramLabel": "@your-handle",
+    "instagramUrl": "#",
+    "siteDescription": "Photography by Frankie Schulte — portraits, events, live music, and personal work.",
+    "demoMode": true,
+    "noIndex": true,
+    "defaultTheme": "orange-violet",
+    "themeColorA": "#ff7448",
+    "themeColorB": "#745cff",
+    "heroIntervalMs": 6500
+  },
+  "navigation": [
+    {
+      "label": "Work",
+      "href": "/work/"
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    },
+    {
+      "label": "Inquire",
+      "href": "/inquire/"
+    }
+  ],
+  "home": {
+    "eyebrow": "Photography by Frankie Schulte",
+    "headline": "Hi, I’m Frankie Schulte.",
+    "intro": "I photograph people, live moments, and the places between.",
+    "primaryCta": {
+      "label": "See my work",
+      "href": "/work/"
+    },
+    "secondaryCta": {
+      "label": "Start a project",
+      "href": "/inquire/"
+    },
+    "exploreLabel": "Explore the portfolio",
+    "heroSlides": [
+      {
+        "src": "/assets/images/demo/hero-concert.jpg",
+        "alt": "Black-and-white live performance under stage lights.",
+        "position": "50% 45%"
+      },
+      {
+        "src": "/assets/images/demo/graduation-02.jpg",
+        "alt": "Portrait made outdoors during a graduation session.",
+        "position": "50% 42%"
+      },
+      {
+        "src": "/assets/images/demo/event-01.jpg",
+        "alt": "A crowded evening gathering photographed from within the room.",
+        "position": "50% 50%"
+      },
+      {
+        "src": "/assets/images/demo/travel-01.jpg",
+        "alt": "Rocky coastline and turquoise water photographed while traveling.",
+        "position": "50% 52%"
+      }
+    ]
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "headline": "People, energy, and place.",
+    "intro": "Browse by kind of work, then open an individual shoot to see the full sequence. The categories can grow and change as the portfolio does."
+  },
+  "about": {
+    "eyebrow": "About",
+    "headline": "I care about how a moment felt—not only how it looked.",
+    "body": [
+      "Hi, I’m Frankie. I make photographs of people, gatherings, performances, and the places I find along the way.",
+      "My approach is observant and collaborative. I’ll give direction when it helps, step back when the moment already has everything it needs, and keep the experience relaxed enough for people to feel like themselves."
+    ],
+    "portrait": "/assets/images/demo/graduation-01.jpg",
+    "portraitAlt": "Temporary demo portrait; replace with a photograph of Frankie.",
+    "availability": "Available for portraits, graduations, events, concerts, editorial work, and select creative projects."
+  },
+  "inquire": {
+    "eyebrow": "Inquire",
+    "headline": "Tell me what you’re making.",
+    "intro": "A date, location, and a little context are enough to start. I’ll reply from my regular email so we can figure out the rest together.",
+    "buttonLabel": "Prepare email",
+    "projectTypes": [
+      "Portrait or graduation",
+      "Event",
+      "Concert or live music",
+      "Editorial or creative",
+      "Personal or travel",
+      "Something else"
+    ]
+  },
+  "categories": [
+    {
+      "slug": "portraits-graduation",
+      "title": "Portraits & Graduation",
+      "shortTitle": "Portraits",
+      "eyebrow": "People / milestones",
+      "intro": "Portraits that feel considered without feeling over-directed—from graduation sessions to personal and editorial work.",
+      "cover": {
+        "src": "/assets/images/demo/graduation-02.jpg",
+        "alt": "Graduation portrait used as temporary demo work.",
+        "orientation": "portrait"
+      },
+      "projects": [
+        {
+          "slug": "campus-walk-demo",
+          "title": "Campus Walk",
+          "kicker": "Demo shoot / replace with real work",
+          "location": "Add location",
+          "year": "2026",
+          "description": "A sample project page showing how one portrait or graduation session can be presented as a complete story.",
+          "cover": {
+            "src": "/assets/images/demo/graduation-02.jpg",
+            "alt": "Graduate photographed outdoors.",
+            "orientation": "portrait"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/graduation-02.jpg",
+              "alt": "Graduate tossing confetti outdoors.",
+              "orientation": "portrait",
+              "caption": "Replace with a real caption or leave blank."
+            },
+            {
+              "src": "/assets/images/demo/graduation-03.jpg",
+              "alt": "Graduate in cap and gown.",
+              "orientation": "portrait",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/graduation-01.jpg",
+              "alt": "Graduate smiling outdoors.",
+              "orientation": "portrait",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "slug": "late-light-portraits-demo",
+          "title": "Late Light Portraits",
+          "kicker": "Demo shoot / replace with real work",
+          "location": "Add location",
+          "year": "2026",
+          "description": "Use this project for another session, a different graduate, an editorial portrait, or a personal portrait series.",
+          "cover": {
+            "src": "/assets/images/demo/graduation-03.jpg",
+            "alt": "Portrait in late outdoor light.",
+            "orientation": "portrait"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/graduation-03.jpg",
+              "alt": "Portrait in academic gown.",
+              "orientation": "portrait",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/graduation-01.jpg",
+              "alt": "Outdoor portrait with soft background.",
+              "orientation": "portrait",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/graduation-02.jpg",
+              "alt": "Celebratory portrait with confetti.",
+              "orientation": "portrait",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "events",
+      "title": "Events",
+      "shortTitle": "Events",
+      "eyebrow": "Gatherings / celebrations",
+      "intro": "The room, the people, the details, and the small moments around the planned ones.",
+      "cover": {
+        "src": "/assets/images/demo/event-01.jpg",
+        "alt": "Guests gathered during an evening event.",
+        "orientation": "landscape"
+      },
+      "projects": [
+        {
+          "slug": "evening-gathering-demo",
+          "title": "Evening Gathering",
+          "kicker": "Demo shoot / replace with real work",
+          "location": "Add venue",
+          "year": "2026",
+          "description": "A sample event story that moves from the full room to details and candid moments.",
+          "cover": {
+            "src": "/assets/images/demo/event-01.jpg",
+            "alt": "Guests gathered indoors.",
+            "orientation": "landscape"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/event-01.jpg",
+              "alt": "Wide view of an evening gathering.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/event-04.jpg",
+              "alt": "Guest holding a glass at a reception.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/event-03.jpg",
+              "alt": "Floral table setting at an event.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/event-02.jpg",
+              "alt": "People moving through a large indoor event.",
+              "orientation": "landscape",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "slug": "reception-details-demo",
+          "title": "Reception Details",
+          "kicker": "Demo shoot / replace with real work",
+          "location": "Add venue",
+          "year": "2026",
+          "description": "A second placeholder project for another event, reception, performance, or community gathering.",
+          "cover": {
+            "src": "/assets/images/demo/event-03.jpg",
+            "alt": "Colorful table details.",
+            "orientation": "landscape"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/event-03.jpg",
+              "alt": "Event table details.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/event-02.jpg",
+              "alt": "Crowd moving through an event.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/event-04.jpg",
+              "alt": "A candid moment at a reception.",
+              "orientation": "landscape",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "concerts",
+      "title": "Concerts",
+      "shortTitle": "Concerts",
+      "eyebrow": "Live music / low light",
+      "intro": "Performers, crowds, stage light, and the energy around a room while it is happening.",
+      "cover": {
+        "src": "/assets/images/demo/hero-concert.jpg",
+        "alt": "Band performing beneath stage lights.",
+        "orientation": "landscape"
+      },
+      "projects": [
+        {
+          "slug": "live-room-demo",
+          "title": "Live Room",
+          "kicker": "Demo shoot / replace with real work",
+          "location": "Add venue",
+          "year": "2026",
+          "description": "A sample concert project with a wide scene, performance frame, and crowd perspective.",
+          "cover": {
+            "src": "/assets/images/demo/hero-concert.jpg",
+            "alt": "Band performing under high-contrast lighting.",
+            "orientation": "landscape"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/hero-concert.jpg",
+              "alt": "Band performing beneath stage lights.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/concert-03.jpg",
+              "alt": "Vocalist leaning toward the crowd.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/concert-02.jpg",
+              "alt": "Audience facing a brightly lit stage.",
+              "orientation": "landscape",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "slug": "crowd-and-stage-demo",
+          "title": "Crowd / Stage",
+          "kicker": "Demo shoot / replace with real work",
+          "location": "Add venue",
+          "year": "2026",
+          "description": "Use this for another artist, venue, show, or festival sequence as the concert archive grows.",
+          "cover": {
+            "src": "/assets/images/demo/concert-03.jpg",
+            "alt": "Singer at the edge of a stage.",
+            "orientation": "landscape"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/concert-03.jpg",
+              "alt": "Singer at the edge of a stage.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/concert-02.jpg",
+              "alt": "Crowd seen from behind during a show.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/hero-concert.jpg",
+              "alt": "Full band under stage lights.",
+              "orientation": "landscape",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "personal-travel",
+      "title": "Personal / Travel",
+      "shortTitle": "Personal",
+      "eyebrow": "Places / observations",
+      "intro": "Photographs made without a client or shot list—the quieter part of how I learn to notice.",
+      "cover": {
+        "src": "/assets/images/demo/travel-01.jpg",
+        "alt": "Rocky coast and turquoise water.",
+        "orientation": "portrait"
+      },
+      "projects": [
+        {
+          "slug": "coastline-demo",
+          "title": "Coastline",
+          "kicker": "Demo series / replace with real work",
+          "location": "Add place",
+          "year": "2026",
+          "description": "A sample travel sequence with room for a location, year, short note, and complete image set.",
+          "cover": {
+            "src": "/assets/images/demo/travel-01.jpg",
+            "alt": "Turquoise water meeting a rocky coast.",
+            "orientation": "portrait"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/travel-01.jpg",
+              "alt": "Rocky coastline and ocean.",
+              "orientation": "portrait",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/travel-02.jpg",
+              "alt": "Coastal road beside green cliffs.",
+              "orientation": "portrait",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/travel-03.jpg",
+              "alt": "Road winding through hills toward the sea.",
+              "orientation": "landscape",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "slug": "roads-between-demo",
+          "title": "Roads Between",
+          "kicker": "Demo series / replace with real work",
+          "location": "Add place",
+          "year": "2026",
+          "description": "Use this for another trip, landscape essay, neighborhood walk, or personal visual study.",
+          "cover": {
+            "src": "/assets/images/demo/travel-03.jpg",
+            "alt": "Quiet road through dark hills.",
+            "orientation": "landscape"
+          },
+          "photos": [
+            {
+              "src": "/assets/images/demo/travel-03.jpg",
+              "alt": "Road through hills.",
+              "orientation": "landscape",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/travel-02.jpg",
+              "alt": "Road along a green coast.",
+              "orientation": "portrait",
+              "caption": ""
+            },
+            {
+              "src": "/assets/images/demo/travel-01.jpg",
+              "alt": "Ocean against rocks.",
+              "orientation": "portrait",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+/
+/work/
+/about/
+/inquire/
+/work/portraits-graduation/
+/work/portraits-graduation/campus-walk-demo/
+/work/portraits-graduation/late-light-portraits-demo/
+/work/events/
+/work/events/evening-gathering-demo/
+/work/events/reception-details-demo/
+/work/concerts/
+/work/concerts/live-room-demo/
+/work/concerts/crowd-and-stage-demo/
+/work/personal-travel/
+/work/personal-travel/coastline-demo/
+/work/personal-travel/roads-between-demo/

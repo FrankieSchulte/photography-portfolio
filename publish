@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+DEST="${1:-/var/www/frankie-portfolio}"
+OWNER="$(stat -c '%U' "$ROOT")"
+
+if [[ "$EUID" -eq 0 && "$OWNER" != "root" ]]; then
+  runuser -u "$OWNER" -- "$ROOT/build"
+else
+  "$ROOT/build"
+fi
+
+if [[ "$EUID" -ne 0 ]]; then
+  echo "Publishing to $DEST normally requires root. Run: sudo ./publish" >&2
+  exit 1
+fi
+
+install -d -m 0755 -o www-data -g www-data "$DEST"
+rsync -a --delete --exclude='.DS_Store' "$ROOT/dist/" "$DEST/"
+chown -R www-data:www-data "$DEST"
+find "$DEST" -type d -exec chmod 0755 {} \;
+find "$DEST" -type f -exec chmod 0644 {} \;
+
+if command -v nginx >/dev/null 2>&1; then
+  nginx -t
+fi
+
+echo "Published to $DEST"

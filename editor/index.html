@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio editor</title>
+  <link rel="stylesheet" href="/__editor__/editor.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Local development tool</span>
+      <h1>Portfolio editor</h1>
+    </div>
+    <div class="top-actions">
+      <span class="status" id="status">Loading…</span>
+      <button class="button secondary" id="open-preview" type="button">Open preview ↗</button>
+      <button class="button primary" id="save" type="button">Save &amp; rebuild</button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Editor sections">
+      <button class="tab active" data-tab="basics">01 <span>Basics</span></button>
+      <button class="tab" data-tab="home">02 <span>Landing page</span></button>
+      <button class="tab" data-tab="work">03 <span>Work &amp; categories</span></button>
+      <button class="tab" data-tab="projects">04 <span>Shoots &amp; photos</span></button>
+      <button class="tab" data-tab="about">05 <span>About &amp; inquiry</span></button>
+      <button class="tab" data-tab="advanced">06 <span>Advanced JSON</span></button>
+      <div class="sidebar-note">
+        <strong>Photo shape rule</strong>
+        <p>Every public image box is locked to either 3:2 landscape or 2:3 portrait. Choose the orientation per photo.</p>
+      </div>
+    </aside>
+
+    <main class="editor-main" id="editor-main" tabindex="-1"></main>
+
+    <aside class="preview-panel">
+      <div class="preview-head"><span>Live build preview</span><button id="refresh-preview" type="button">Refresh</button></div>
+      <iframe id="preview" title="Portfolio preview" src="/"></iframe>
+    </aside>
+  </div>
+
+  <input id="upload-input" type="file" accept="image/jpeg,image/png,image/webp,image/avif" hidden>
+  <datalist id="image-library"></datalist>
+  <script src="/__editor__/editor.js"></script>
+</body>
+</html>
