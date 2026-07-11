@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://portfolio.example/</loc></url>
+  <url><loc>https://portfolio.example/work/</loc></url>
+  <url><loc>https://portfolio.example/concerts/</loc></url>
+  <url><loc>https://portfolio.example/portraits/</loc></url>
+  <url><loc>https://portfolio.example/events/</loc></url>
+  <url><loc>https://portfolio.example/field-notes/</loc></url>
+  <url><loc>https://portfolio.example/about/</loc></url>
+  <url><loc>https://portfolio.example/inquire/</loc></url>
+</urlset>

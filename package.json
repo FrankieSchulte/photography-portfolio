@@ -1,0 +1,20 @@
+{
+  "name": "photography-portfolio-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A dependency-light editorial photography portfolio starter with responsive image tooling.",
+  "type": "module",
+  "scripts": {
+    "demo:images": "python3 scripts/generate-demo-images.py",
+    "images": "python3 scripts/optimize-images.py",
+    "build": "node scripts/build.mjs",
+    "audit": "node scripts/audit.mjs",
+    "rebuild": "npm run images && npm run build && npm run audit",
+    "dev": "npm run build && node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=18",
+    "python": ">=3.10"
+  }
+}
