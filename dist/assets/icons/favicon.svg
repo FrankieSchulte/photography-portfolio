@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Portfolio mark">
-  <rect width="64" height="64" fill="#0A0A0A"/>
-  <rect x="8" y="8" width="48" height="48" fill="none" stroke="#D8FF3E" stroke-width="3"/>
-  <circle cx="32" cy="32" r="11" fill="#F2EFE7"/>
-  <path d="M8 48h22L16 56H8z" fill="#D8FF3E"/>
-</svg>
