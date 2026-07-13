@@ -20,12 +20,12 @@ python3 tools/check_site.py
 
 ## Preserve these product decisions
 
-- The homepage remains a one-screen landing scene, not a long homepage.
+- The homepage remains a one-screen landing scene with a horizontal highlighted-photo sequence, not a long homepage.
 - The primary home action stays generalized rather than graduation- or concert-specific.
 - The portfolio hierarchy is Work → Category → Shoot → Gallery.
-- Every reusable photo frame must use 3:2 landscape or 2:3 portrait.
-- Keep the grainy two-color light field subtle enough that photography remains dominant.
-- Avoid generic card-dashboard styling, harsh rectangular borders, excessive glass effects, fake credentials, fake clients, and AI-sounding marketing copy.
+- Work-category and shoot-cover frames are square for a consistent index. Full gallery photographs remain 3:2 landscape or 2:3 portrait.
+- Keep the grid, grain, acid/cobalt accents, ASCII marks, and cybersigil-inspired details subtle enough that photography remains dominant.
+- Preserve the sharp editorial/Y2K fashion-magazine direction. Avoid generic card-dashboard styling, excessive glass effects, fake credentials, fake clients, and AI-sounding marketing copy.
 - Copy should sound personal, direct, and first-person.
 - Preserve keyboard access, visible focus, reduced motion, semantic headings, useful alt text, and the truthful mail-draft inquiry behavior.
 - The local editor must never be copied into `dist/` or publicly deployed.

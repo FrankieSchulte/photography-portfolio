@@ -89,19 +89,21 @@
     main.innerHTML = sectionHead("Site basics", "Change your name, contact details, navigation labels, theme, and development safety settings.") +
       panel("Identity & contact", `<div class="grid">${input("Name", "meta.name")}${input("Short mark", "meta.shortName")}${input("Role", "meta.role")}${input("Location", "meta.location")}${input("Email", "meta.email", { type: "email" })}${input("Instagram label", "meta.instagramLabel")}${input("Instagram URL", "meta.instagramUrl", { wide: true })}${input("Site description", "meta.siteDescription", { type: "textarea", wide: true })}</div>`) +
       panel("Navigation", `<div class="row-list">${navRows}</div>`, '<button class="button small secondary" type="button" data-action="add-nav">+ Add button</button>') +
-      panel("Color & motion", `<div class="grid three">${input("Default color one", "meta.themeColorA", { type: "color" })}${input("Default color two", "meta.themeColorB", { type: "color" })}${input("Hero timing (milliseconds)", "meta.heroIntervalMs", { type: "number", min: "2800", step: "100" })}</div>`) +
+      panel("Accent colors", `<div class="grid">${input("Default color one", "meta.themeColorA", { type: "color" })}${input("Default color two", "meta.themeColorB", { type: "color" })}</div>`) +
       panel("Publishing state", `<div class="grid">${input("Demo mode", "meta.demoMode", { type: "checkbox", help: "Keep this on while placeholder work or contact details remain." })}${input("Block search engines", "meta.noIndex", { type: "checkbox", help: "Turn this off only when the site is ready for public indexing." })}</div>`);
   }
 
   function renderHome() {
     const slides = state.home.heroSlides.map((slide, index) => `<div class="list-row"><div class="row-fields">
-      ${imageField(`Slide ${index + 1}`, `home.heroSlides.${index}.src`)}
+      ${imageField(`Featured frame ${index + 1}`, `home.heroSlides.${index}.src`)}
       ${input("Alt text", `home.heroSlides.${index}.alt`, { wide: true })}
       ${input("Image focus", `home.heroSlides.${index}.position`, { help: "CSS position such as 50% 40%." })}
+      ${input("Frame label", `home.heroSlides.${index}.label`, { wide: true })}
+      ${input("Frame shape", `home.heroSlides.${index}.orientation`, { type: "select", options: [{value:"portrait",label:"Portrait"},{value:"landscape",label:"Landscape"},{value:"square",label:"Square"}] })}
     </div><div class="inline-actions"><button class="button small secondary" type="button" data-action="move-slide-up" data-index="${index}">↑</button><button class="button small secondary" type="button" data-action="move-slide-down" data-index="${index}">↓</button><button class="button small danger" type="button" data-action="remove-slide" data-index="${index}">Remove</button></div></div>`).join("");
-    main.innerHTML = sectionHead("Landing page", "The homepage stays to one full-screen scene: rotating photographs, subtle grainy light, your introduction, and two clear actions.") +
-      panel("Opening copy", `<div class="grid">${input("Small label", "home.eyebrow", { wide: true })}${input("Main headline", "home.headline", { wide: true })}${input("Short introduction", "home.intro", { type: "textarea", wide: true })}${input("Primary button name", "home.primaryCta.label")}${input("Primary button link", "home.primaryCta.href")}${input("Secondary button name", "home.secondaryCta.label")}${input("Secondary button link", "home.secondaryCta.href")}${input("Category rail label", "home.exploreLabel", { wide: true })}</div>`) +
-      panel("Rotating hero photographs", `<div class="notice">Use three to six strong images. The first loads immediately; the rest cross-fade on the timer from Basics. Full-screen hero images may crop responsively, while every grid/gallery box stays 3:2 or 2:3.</div><div class="row-list" style="margin-top:.8rem">${slides}</div>`, '<button class="button small secondary" type="button" data-action="add-slide">+ Add slide</button>');
+    main.innerHTML = sectionHead("Landing page", "The homepage stays to one full-screen editorial scene with a horizontally scrollable sequence, your introduction, and two clear actions.") +
+      panel("Opening copy", `<div class="grid">${input("Small label", "home.eyebrow", { wide: true })}${input("Main headline (metadata fallback)", "home.headline", { wide: true, help: "The visible masthead uses your name from Site basics." })}${input("Short introduction", "home.intro", { type: "textarea", wide: true })}${input("Primary button name", "home.primaryCta.label")}${input("Primary button link", "home.primaryCta.href")}${input("Secondary button name", "home.secondaryCta.label")}${input("Secondary button link", "home.secondaryCta.href")}${input("Sequence instruction", "home.exploreLabel", { wide: true })}</div>`) +
+      panel("Featured horizontal sequence", `<div class="notice">Use three to six strong images. The first three are prepared for the opening viewport; the remaining frames load as visitors move through the sequence. Set a truthful label, useful alt text, source shape, and crop focus for each frame.</div><div class="row-list" style="margin-top:.8rem">${slides}</div>`, '<button class="button small secondary" type="button" data-action="add-slide">+ Add frame</button>');
   }
 
   function renderWork() {
@@ -164,7 +166,7 @@
     const index = Number(element.dataset.index || 0);
     if (action === "add-nav") state.navigation.push({ label: "New link", href: "/" });
     if (action === "remove-nav") state.navigation.splice(index, 1);
-    if (action === "add-slide") state.home.heroSlides.push({ src: "", alt: "", position: "50% 50%" });
+    if (action === "add-slide") state.home.heroSlides.push({ src: "", alt: "", position: "50% 50%", orientation: "portrait", label: "Selected frame" });
     if (action === "remove-slide") state.home.heroSlides.splice(index, 1);
     if (action === "move-slide-up") move(state.home.heroSlides, index, -1);
     if (action === "move-slide-down") move(state.home.heroSlides, index, 1);

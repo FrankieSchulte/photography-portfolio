@@ -5,17 +5,17 @@ A dependency-free photography portfolio with a local visual editor. The public w
 ## What this revision changes
 
 - A true one-screen landing page rather than a long homepage.
-- A timed, cross-fading hero slideshow behind a subtle animated grain and two-color light field.
+- A touch-, wheel-, keyboard-, and button-accessible horizontal sequence showing several highlighted photographs immediately.
 - General positioning and a primary **See my work** action instead of graduation-first language.
-- Softer panels, rounded image frames, film grain, gradient light, and more restrained motion.
+- Oversized masthead typography, sharp print geometry, ASCII/registration details, subtle grain, and acid/cobalt interface accents.
 - Responsive type that wraps instead of clipping in narrow browsers.
 - A portfolio hierarchy modeled after Adobe Portfolio:
   - Work index
   - Photography category
   - Individual shoot
   - Full shoot gallery and lightbox
-- Every grid and gallery image box is locked to **3:2 landscape** or **2:3 portrait**.
-- A browser-based editor for copy, button names, navigation, colors, hero slides, categories, shoots, covers, and gallery photographs.
+- Category and shoot covers are square; full shoot galleries retain **3:2 landscape** or **2:3 portrait** frames.
+- A browser-based editor for copy, button names, navigation, colors, featured homepage frames, categories, shoots, covers, and gallery photographs.
 - Reduced-motion behavior, keyboard navigation, accessible lightbox controls, and visible focus states.
 
 ## Start the editor
@@ -42,7 +42,7 @@ There is nothing to install.
 - Photographer name, role, location, email, and Instagram.
 - Header button names and destinations.
 - Landing-page headline, introduction, and both call-to-action buttons.
-- Hero slideshow photos, alt text, focus position, ordering, and timing.
+- Featured homepage photos, labels, alt text, focus position, shape, and ordering.
 - Public theme colors.
 - Work-page headline and introduction.
 - Category names, descriptions, covers, ordering, and URL slugs.
@@ -77,7 +77,7 @@ python3 tools/check_site.py
 ```text
 content/site.json                All editable site content and portfolio data
 public/assets/site.css           Public visual design and responsive behavior
-public/assets/site.js            Slideshow, menus, theme, motion, lightbox, form
+public/assets/site.js            Horizontal sequence, menus, theme, lightbox, form
 public/assets/images/            Demo images and editor uploads
 tools/build_site.py              Static page generator
 tools/dev_server.py              Local editor and preview server
@@ -100,12 +100,12 @@ public/assets/images/uploads/
 
 Use web-sized JPEG, WebP, PNG, or AVIF files. A practical starting point is 1600–2400 pixels on the long edge in sRGB. Do not publish original full-resolution client files.
 
-The site constrains display boxes to:
+The site constrains full-gallery display boxes to:
 
 - `landscape` → 3:2
 - `portrait` → 2:3
 
-Images fill those boxes with `object-fit: cover`, so select the correct orientation and export/crop important photographs thoughtfully. The full-screen landing image may crop differently at each browser size by design; use the editor's focus value, such as `50% 35%`, to protect the important part of the frame.
+Category and shoot-cover indexes use square crops. Full-gallery images fill the 3:2 or 2:3 boxes with `object-fit: cover`, so select the correct orientation and export/crop important photographs thoughtfully. Homepage frames may crop differently at each browser size by design; use the editor's focus value, such as `50% 35%`, to protect the important part of the frame.
 
 ## Edit from the Proxmox server safely
 

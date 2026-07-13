@@ -8,6 +8,13 @@
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const themeKey = "frankie-portfolio-theme-v2";
+  let menuReturnFocus = null;
+  let themeReturnFocus = null;
+
+  function focusable(scope) {
+    return $$('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])', scope)
+      .filter((node) => node.getAttribute("aria-hidden") !== "true");
+  }
 
   function initializeYear() {
     $$('[data-year]').forEach((node) => {
@@ -16,9 +23,18 @@
   }
 
   function setMenu(open) {
+    const wasOpen = body.classList.contains("menu-open");
     body.classList.toggle("menu-open", open);
-    $('[data-menu-button]')?.setAttribute("aria-expanded", String(open));
+    const button = $('[data-menu-button]');
+    button?.setAttribute("aria-expanded", String(open));
+    button?.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
     $('[data-mobile-menu]')?.setAttribute("aria-hidden", String(!open));
+    if (open && !wasOpen) {
+      menuReturnFocus = document.activeElement;
+      window.requestAnimationFrame(() => $('[data-mobile-menu] a')?.focus());
+    } else if (!open && wasOpen && menuReturnFocus instanceof HTMLElement) {
+      menuReturnFocus.focus();
+    }
   }
 
   function initializeMenu() {
@@ -41,14 +57,21 @@
   }
 
   function setThemePanel(open) {
+    const wasOpen = body.classList.contains("theme-open");
     body.classList.toggle("theme-open", open);
     $('[data-theme-panel]')?.setAttribute("aria-hidden", String(!open));
+    if (open && !wasOpen) {
+      themeReturnFocus = document.activeElement;
+      window.requestAnimationFrame(() => $('[data-theme-close]')?.focus());
+    } else if (!open && wasOpen && themeReturnFocus instanceof HTMLElement) {
+      themeReturnFocus.focus();
+    }
   }
 
   function initializeTheme() {
     let saved = null;
     try { saved = JSON.parse(localStorage.getItem(themeKey) || "null"); } catch (_) { saved = null; }
-    applyTheme(saved?.a || config.themeColorA || "#ff7448", saved?.b || config.themeColorB || "#745cff", false);
+    applyTheme(saved?.a || config.themeColorA || "#d8ff3e", saved?.b || config.themeColorB || "#4967ff", false);
 
     $$('[data-theme-open]').forEach((button) => button.addEventListener("click", () => setThemePanel(true)));
     $('[data-theme-close]')?.addEventListener("click", () => setThemePanel(false));
@@ -78,38 +101,81 @@
     items.forEach((item) => observer.observe(item));
   }
 
-  function initializeHeroSlideshow() {
-    const slides = $$('[data-hero-slide]');
-    if (slides.length < 2) return;
-    const counter = $('[data-hero-counter]');
-    let index = 0;
-    let timer = 0;
-    const interval = Math.max(2800, Number(config.heroIntervalMs) || 6500);
+  function initializeHomeRail() {
+    const rail = $('[data-home-rail]');
+    if (!rail) return;
+    const items = $$('[data-home-feature]', rail);
+    const count = $('[data-rail-count]');
+    const behavior = reducedMotion.matches ? "auto" : "smooth";
+    let frame = 0;
+    let dragging = false;
+    let startX = 0;
+    let startScroll = 0;
 
-    const show = (next) => {
-      index = (next + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => {
-        const active = slideIndex === index;
-        slide.classList.toggle("is-active", active);
-        slide.setAttribute("aria-hidden", String(!active));
+    const currentIndex = () => {
+      const leadingEdge = rail.scrollLeft + Math.min(48, rail.clientWidth * .12);
+      let nearest = 0;
+      let distance = Number.POSITIVE_INFINITY;
+      items.forEach((item, index) => {
+        const nextDistance = Math.abs(leadingEdge - item.offsetLeft);
+        if (nextDistance < distance) {
+          distance = nextDistance;
+          nearest = index;
+        }
       });
-      if (counter) counter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+      return nearest;
     };
 
-    const stop = () => window.clearInterval(timer);
-    const start = () => {
-      stop();
-      if (!reducedMotion.matches && !document.hidden) timer = window.setInterval(() => show(index + 1), interval);
+    const updateCount = () => {
+      frame = 0;
+      if (count) count.textContent = `${String(currentIndex() + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}`;
+    };
+    const scheduleCount = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateCount);
+    };
+    const move = (amount) => {
+      rail.scrollBy({ left: amount * Math.max(240, rail.clientWidth * .72), behavior });
     };
 
-    document.addEventListener("visibilitychange", start);
-    reducedMotion.addEventListener?.("change", start);
-    start();
+    $('[data-rail-prev]')?.addEventListener("click", () => move(-1));
+    $('[data-rail-next]')?.addEventListener("click", () => move(1));
+    rail.addEventListener("scroll", scheduleCount, { passive: true });
+    rail.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        move(event.key === "ArrowLeft" ? -1 : 1);
+      }
+    });
+    rail.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      rail.scrollLeft += event.deltaY;
+    }, { passive: false });
+    rail.addEventListener("pointerdown", (event) => {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      dragging = true;
+      startX = event.clientX;
+      startScroll = rail.scrollLeft;
+      rail.classList.add("is-dragging");
+      rail.setPointerCapture(event.pointerId);
+    });
+    rail.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      rail.scrollLeft = startScroll - (event.clientX - startX);
+    });
+    const stopDrag = () => {
+      dragging = false;
+      rail.classList.remove("is-dragging");
+    };
+    rail.addEventListener("pointerup", stopDrag);
+    rail.addEventListener("pointercancel", stopDrag);
+    updateCount();
   }
 
   function initializeCardMotion() {
     if (reducedMotion.matches || !window.matchMedia("(pointer: fine)").matches) return;
-    $$('[data-tilt], .category-card, .project-card').forEach((card) => {
+    $$('[data-tilt]').forEach((card) => {
       card.addEventListener("pointermove", (event) => {
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -217,9 +283,25 @@
 
   function initializeGlobalKeyboard() {
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      setMenu(false);
-      setThemePanel(false);
+      if (event.key === "Escape") {
+        setMenu(false);
+        setThemePanel(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const openSurface = body.classList.contains("menu-open") ? $('[data-mobile-menu]') : body.classList.contains("theme-open") ? $('[data-theme-panel]') : null;
+      if (!openSurface) return;
+      const nodes = focusable(openSurface);
+      if (!nodes.length) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
   }
 
@@ -227,7 +309,7 @@
   initializeMenu();
   initializeTheme();
   initializeReveals();
-  initializeHeroSlideshow();
+  initializeHomeRail();
   initializeCardMotion();
   initializeLightbox();
   initializeInquiryForm();

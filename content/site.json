@@ -10,10 +10,9 @@
     "siteDescription": "Photography by Frankie Schulte — portraits, events, live music, and personal work.",
     "demoMode": true,
     "noIndex": true,
-    "defaultTheme": "orange-violet",
-    "themeColorA": "#ff7448",
-    "themeColorB": "#745cff",
-    "heroIntervalMs": 6500
+    "defaultTheme": "acid-cobalt",
+    "themeColorA": "#d8ff3e",
+    "themeColorB": "#4967ff"
   },
   "navigation": [
     {
@@ -30,9 +29,9 @@
     }
   ],
   "home": {
-    "eyebrow": "Photography by Frankie Schulte",
-    "headline": "Hi, I’m Frankie Schulte.",
-    "intro": "I photograph people, live moments, and the places between.",
+    "eyebrow": "Independent image-maker / selected works",
+    "headline": "Frankie Schulte",
+    "intro": "Portraits, live energy, strange light, and the places between.",
     "primaryCta": {
       "label": "See my work",
       "href": "/work/"
@@ -41,27 +40,42 @@
       "label": "Start a project",
       "href": "/inquire/"
     },
-    "exploreLabel": "Explore the portfolio",
+    "exploreLabel": "Drag / scroll the sequence",
     "heroSlides": [
       {
-        "src": "/assets/images/demo/hero-concert.jpg",
-        "alt": "Black-and-white live performance under stage lights.",
-        "position": "50% 45%"
+        "src": "/assets/images/highlights/high-desert-portrait.webp",
+        "alt": "A person in black clothing and sunglasses seated beneath a Joshua tree against a vivid blue sky.",
+        "position": "50% 45%",
+        "orientation": "portrait",
+        "label": "High desert / portrait"
       },
       {
-        "src": "/assets/images/demo/graduation-02.jpg",
-        "alt": "Portrait made outdoors during a graduation session.",
-        "position": "50% 42%"
+        "src": "/assets/images/highlights/carter-submerged.webp",
+        "alt": "An underwater portrait in luminous blue water with the subject reaching toward the surface.",
+        "position": "50% 50%",
+        "orientation": "portrait",
+        "label": "Submerged / portrait"
       },
       {
-        "src": "/assets/images/demo/event-01.jpg",
-        "alt": "A crowded evening gathering photographed from within the room.",
-        "position": "50% 50%"
+        "src": "/assets/images/highlights/fire-spinning.webp",
+        "alt": "A fire performer surrounded by sweeping rings of flame during a long exposure.",
+        "position": "50% 50%",
+        "orientation": "landscape",
+        "label": "Fire study / motion"
       },
       {
-        "src": "/assets/images/demo/travel-01.jpg",
-        "alt": "Rocky coastline and turquoise water photographed while traveling.",
-        "position": "50% 52%"
+        "src": "/assets/images/highlights/kevin-live-color.webp",
+        "alt": "A guitarist performing beneath a dramatic rainbow beam of stage light.",
+        "position": "45% 50%",
+        "orientation": "portrait",
+        "label": "Live color / performance"
+      },
+      {
+        "src": "/assets/images/highlights/palm-phone-duo.webp",
+        "alt": "Two people seated in a palm grove with a white telephone placed between them.",
+        "position": "50% 58%",
+        "orientation": "square",
+        "label": "Palm study / duo"
       }
     ]
   },

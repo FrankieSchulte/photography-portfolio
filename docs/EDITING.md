@@ -4,7 +4,7 @@
 
 The site is intentionally organized around four levels:
 
-1. **Landing page** — a full-screen introduction and rotating image sequence.
+1. **Landing page** — a full-screen introduction and horizontal highlighted-image sequence.
 2. **Work index** — equal entry points into the current photography categories.
 3. **Category page** — a responsive grid of distinct shoots.
 4. **Shoot page** — a complete image sequence for one session, show, event, or trip.
@@ -18,7 +18,7 @@ All content lives in `content/site.json`. The browser editor changes that file a
 3. Choose the category.
 4. Select **Add shoot**.
 5. Give it a unique title and URL slug.
-6. Upload or select a cover, then choose 3:2 landscape or 2:3 portrait.
+6. Upload or select a cover and identify the source orientation. Public category and shoot covers display as square crops.
 7. Add gallery photographs, alt text, and optional captions.
 8. Save and rebuild.
 
@@ -30,9 +30,9 @@ The category grid and new shoot page are generated automatically.
 - Landing buttons: **Landing page → Opening copy**.
 - Inquiry submit button: **About & inquiry → Inquiry page**.
 
-## Replace a hero photograph
+## Replace a featured homepage photograph
 
-Open **Landing page**, upload the image in the hero list, set meaningful alt text, and adjust focus with a value such as:
+Open **Landing page**, upload the image in the featured sequence, add a short frame label and meaningful alt text, choose its source shape, and adjust focus with a value such as:
 
 ```text
 50% 35%
