@@ -9,10 +9,7 @@
     "instagramUrl": "#",
     "siteDescription": "Photography by Frankie Schulte — portraits, events, live music, and personal work.",
     "demoMode": true,
-    "noIndex": true,
-    "defaultTheme": "acid-cobalt",
-    "themeColorA": "#d8ff3e",
-    "themeColorB": "#4967ff"
+    "noIndex": true
   },
   "navigation": [
     {
@@ -40,7 +37,8 @@
       "label": "Start a project",
       "href": "/inquire/"
     },
-    "exploreLabel": "Drag / scroll the sequence",
+    "exploreLabel": "Scroll the contact sheet",
+    "asciiArt": "              .        .\n         .:::/\\______/\\:::.\n      .:/   /  /\\  /\\  \\   \\:.\n     <    <   <  \\/  >   >    >\n      ':\\___\\__/\\__/___/:'\n          /_/  /  \\  \\_\\\n        .:'   /____\\   ':.",
     "heroSlides": [
       {
         "src": "/assets/images/highlights/high-desert-portrait.webp",

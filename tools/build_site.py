@@ -56,30 +56,25 @@ def image_markup(photo: dict, *, class_name: str = "", eager: bool = False, ligh
 def head(data: dict, title: str, description: str, path: str, body_class: str) -> str:
     meta = data["meta"]
     robots = '<meta name="robots" content="noindex,nofollow">' if meta.get("noIndex", True) else '<meta name="robots" content="index,follow">'
-    theme_a = esc(meta.get("themeColorA", "#d8ff3e"))
-    theme_b = esc(meta.get("themeColorB", "#4967ff"))
     config = {
         "name": meta.get("name", "Frankie Schulte"),
         "email": meta.get("email", ""),
         "instagramUrl": meta.get("instagramUrl", "#"),
-        "defaultTheme": meta.get("defaultTheme", "custom"),
-        "themeColorA": meta.get("themeColorA", "#d8ff3e"),
-        "themeColorB": meta.get("themeColorB", "#4967ff"),
         "demoMode": meta.get("demoMode", True),
     }
+    ascii_art = data.get("home", {}).get("asciiArt", ":: FRANKIE SCHULTE / IMAGE ARCHIVE ::")
     return f'''<!doctype html>
-<html lang="en" style="--theme-a:{theme_a};--theme-b:{theme_b}">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(description)}">
   {robots}
-  <meta name="theme-color" content="#0c0b10">
+  <meta name="theme-color" content="#ffffff">
   <meta property="og:type" content="website">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
-  <meta property="og:image" content="/assets/images/og-preview.jpg">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script>window.PORTFOLIO_CONFIG={json.dumps(config, ensure_ascii=False)};</script>
@@ -88,8 +83,8 @@ def head(data: dict, title: str, description: str, path: str, body_class: str) -
 <body class="{esc(body_class)}" data-path="{esc(path)}">
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="ambient-field" aria-hidden="true">
-  <div class="ambient-blob ambient-blob-a"></div>
-  <div class="ambient-blob ambient-blob-b"></div>
+  <div class="ambient-ascii"><pre data-ascii-output>{esc(ascii_art)}</pre></div>
+  <div class="ambient-sigil"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="ambient-noise"></div>
 </div>
 '''
@@ -111,38 +106,17 @@ def header(data: dict, active: str = "") -> str:
     </a>
     <nav class="desktop-nav" aria-label="Primary">{''.join(links)}</nav>
     <div class="header-actions">
-      <span class="header-edition" aria-hidden="true">PORTFOLIO // 26</span>
-      <button class="theme-button" type="button" data-theme-open aria-label="Choose accent colors"><span></span><span></span><b>COLOR</b></button>
+      <span class="header-edition" aria-hidden="true">VOL. 01 / <span data-year></span></span>
       <button class="menu-button" type="button" data-menu-button aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
     </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
-  <div class="mobile-menu-code" aria-hidden="true">[ NAV_SYS / OPEN ]<br>+ + + + + + + + + +</div>
+  <div class="mobile-menu-code" aria-hidden="true">SELECTED IMAGE ARCHIVE<br>◜───────────◝</div>
+  <div class="mobile-menu-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <nav aria-label="Mobile navigation">{''.join(links)}</nav>
   <div class="mobile-contact"><span>{esc(meta.get('location'))}</span><a href="mailto:{esc(meta.get('email'))}">{esc(meta.get('email'))}</a></div>
 </div>
-'''
-
-
-def theme_panel(data: dict) -> str:
-    meta = data["meta"]
-    return f'''
-<div class="theme-scrim" data-theme-scrim></div>
-<aside class="theme-panel" data-theme-panel aria-hidden="true" aria-label="Color theme">
-  <div class="theme-panel-head"><div><span class="micro-label">Color channel / UI-02</span><h2>Change the signal.</h2></div><button type="button" data-theme-close>Close ×</button></div>
-  <p>Accent colors affect interface marks only. The photographs keep their original color.</p>
-  <div class="theme-presets">
-    <button type="button" data-theme-preset data-a="#d8ff3e" data-b="#4967ff"><span style="--sw-a:#d8ff3e;--sw-b:#4967ff"></span>Acid / cobalt</button>
-    <button type="button" data-theme-preset data-a="#f4f2ed" data-b="#858585"><span style="--sw-a:#f4f2ed;--sw-b:#858585"></span>Paper / chrome</button>
-    <button type="button" data-theme-preset data-a="#ff4f00" data-b="#ff8fd1"><span style="--sw-a:#ff4f00;--sw-b:#ff8fd1"></span>Signal / blush</button>
-    <button type="button" data-theme-preset data-a="#64e9ff" data-b="#8a5cff"><span style="--sw-a:#64e9ff;--sw-b:#8a5cff"></span>Ice / ultraviolet</button>
-  </div>
-  <div class="custom-colors">
-    <label>Color one <input type="color" data-color-a value="{esc(meta.get('themeColorA'))}"></label>
-    <label>Color two <input type="color" data-color-b value="{esc(meta.get('themeColorB'))}"></label>
-  </div>
-</aside>
 '''
 
 
@@ -151,10 +125,10 @@ def footer(data: dict) -> str:
     return f'''
 <footer class="site-footer">
   <div class="footer-shell">
-    <div class="footer-code"><span>FS® / IMAGE ARCHIVE</span><span>SELECTED WORKS / 01—04</span></div>
+    <div class="footer-code"><span>FRANKIE SCHULTE / IMAGE ARCHIVE</span><span>SELECTED WORKS / 01—04</span></div>
     <a class="footer-name" href="/">{esc(meta.get('name'))}</a>
     <div class="footer-links"><a href="mailto:{esc(meta.get('email'))}">{esc(meta.get('email'))}</a><a href="{esc(meta.get('instagramUrl'))}" rel="noreferrer">{esc(meta.get('instagramLabel'))}</a><span>{esc(meta.get('location'))}</span></div>
-    <span class="footer-barcode" aria-hidden="true"></span>
+    <span class="footer-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
     <p class="footer-fine">© <span data-year></span> {esc(meta.get('name'))}. All photographs remain the property of their respective creator.</p>
   </div>
 </footer>
@@ -162,11 +136,14 @@ def footer(data: dict) -> str:
 
 
 def end(data: dict, *, include_footer: bool = True) -> str:
-    return (footer(data) if include_footer else "") + theme_panel(data) + "\n</body>\n</html>\n"
+    return (footer(data) if include_footer else "") + "\n</body>\n</html>\n"
 
 
 def render_home(data: dict) -> str:
     meta, home = data["meta"], data["home"]
+    name_parts = str(meta.get("name", "Frankie Schulte")).split(maxsplit=1)
+    name_first = name_parts[0]
+    name_last = name_parts[1] if len(name_parts) > 1 else ""
     features = []
     for index, slide in enumerate(home.get("heroSlides", [])):
         orient = slide.get("orientation", "landscape")
@@ -177,13 +154,13 @@ def render_home(data: dict) -> str:
         label = slide.get("label", f"Selected frame {str(index + 1).zfill(2)}")
         width, height = {"portrait": (1000, 1500), "landscape": (1500, 1000), "square": (1200, 1200)}[orient]
         features.append(f'''
-<article class="home-feature feature-{esc(orient)}" data-home-feature>
+<article class="home-feature home-feature-{index + 1} feature-{esc(orient)}" data-home-feature>
   <figure class="home-feature-media">
     <img src="{esc(slide.get('src'))}" alt="{esc(slide.get('alt'))}" width="{width}" height="{height}" style="--focus:{esc(slide.get('position', '50% 50%'))}" loading="{load}" decoding="async"{priority}>
     <span class="photo-grain" aria-hidden="true"></span>
-    <span class="frame-corner frame-corner-a" aria-hidden="true"></span><span class="frame-corner frame-corner-b" aria-hidden="true"></span>
+    <span class="crop-node crop-node-a" aria-hidden="true"></span><span class="crop-node crop-node-b" aria-hidden="true"></span>
   </figure>
-  <p><span>FS—{str(index + 1).zfill(2)}</span>{esc(label)}</p>
+  <p><span>{str(index + 1).zfill(2)}</span>{esc(label)}</p>
 </article>''')
     categories = "".join(
         f'<a href="/work/{esc(cat["slug"])}/"><span>{str(i+1).zfill(2)}</span>{esc(cat.get("shortTitle", cat.get("title")))}</a>'
@@ -197,13 +174,14 @@ def render_home(data: dict) -> str:
     out += f'''
 <main id="main" class="home-stage">
   <section class="home-masthead" aria-labelledby="home-title">
-    <div class="masthead-meta"><span>ISSUE 001 / <span data-year></span></span><span>{esc(meta.get('role'))} / {esc(meta.get('location'))}</span><span>VISUAL ARCHIVE // 01—{str(max(1, len(features))).zfill(2)}</span></div>
-    <h1 id="home-title">{esc(meta.get('name'))}</h1>
-    <div class="masthead-rule" aria-hidden="true"><span>+ + +</span><span>⌁ IMAGE SIGNAL / ACTIVE ⌁</span><span>+ + +</span></div>
+    <div class="masthead-meta"><span>ISSUE 001 / <span data-year></span></span><span>{esc(meta.get('role'))} / {esc(meta.get('location'))}</span><span>PHOTOGRAPHS 01—{str(max(1, len(features))).zfill(2)}</span></div>
+    <h1 id="home-title"><span>{esc(name_first)}</span><span>{esc(name_last)}</span></h1>
+    <div class="masthead-rule" aria-hidden="true"><span>SELECTED WORKS</span><span>IMAGE / LIGHT / MOVEMENT</span><span>VOL. 01</span></div>
   </section>
   <section class="home-sequence" aria-label="Highlighted photographs">
-    <div class="sequence-ascii" aria-hidden="true"><pre>┌─[ FS.IMG ]─┐&#10;│ 010011001  │&#10;│ :: FRAME ::│&#10;└────────────┘</pre></div>
-    <div class="home-rail" data-home-rail tabindex="0" aria-label="Highlighted photographs. Scroll horizontally or use the arrow buttons.">{''.join(features)}</div>
+    <aside class="home-folio" aria-hidden="true"><b>01</b><strong>Selected<br>works</strong><small>Independent<br>photography</small><span class="tone-swatches"><i></i><i></i><i></i><i></i></span></aside>
+    <div class="home-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="home-rail" data-home-rail tabindex="0" aria-label="Highlighted photographs. Scroll horizontally or use the arrow buttons."><div class="home-spread">{''.join(features)}<div class="spread-note" aria-hidden="true"><span>I WANT YOU TO</span><span>STOP THE TIME,</span><span>IN THIS MOMENT</span></div><div class="spread-check" aria-hidden="true"></div></div></div>
     <div class="rail-controls">
       <span>{esc(home.get('exploreLabel'))}</span>
       <span class="rail-count" data-rail-count aria-live="polite">01 / {str(max(1, len(features))).zfill(2)}</span>
@@ -214,7 +192,7 @@ def render_home(data: dict) -> str:
   <section class="home-copy">
     <div><p class="micro-label hero-eyebrow">{esc(home.get('eyebrow'))}</p><p class="home-intro">{esc(home.get('intro'))}</p></div>
     <div class="home-actions">
-      <a class="button button-primary" href="{esc(primary.get('href', '/work/'))}">{esc(primary.get('label', 'See my work'))}<span aria-hidden="true">↗</span></a>
+      <a class="button button-primary" href="{esc(primary.get('href', '/work/'))}">{esc(primary.get('label', 'See my work'))}<span aria-hidden="true">→</span></a>
       <a class="button button-secondary" href="{esc(secondary.get('href', '/inquire/'))}">{esc(secondary.get('label', 'Start a project'))}</a>
     </div>
     <nav class="home-index" aria-label="Portfolio categories">{categories}</nav>
@@ -232,7 +210,7 @@ def render_work(data: dict) -> str:
         cover = cat.get("cover", {})
         cards.append(f'''
 <a class="category-card" href="/work/{esc(cat['slug'])}/" data-reveal>
-  <div class="category-card-media">{image_markup(cover, class_name='category-card-image ratio-square')}<span class="category-card-index">FS / {str(i+1).zfill(2)}</span><span class="category-card-mark" aria-hidden="true">+</span></div>
+  <div class="category-card-media">{image_markup(cover, class_name='category-card-image ratio-square')}<span class="category-card-index">{str(i+1).zfill(2)}</span><span class="category-card-mark" aria-hidden="true">✣</span></div>
   <span class="category-card-copy"><small>{esc(cat.get('eyebrow'))}</small><strong>{esc(cat.get('title'))}</strong><em>{len(cat.get('projects', []))} shoots ↗</em></span>
 </a>''')
     out = head(data, f'Work — {meta.get("name")}', work.get("intro", ""), "/work/", "page-inner page-work")
@@ -240,7 +218,8 @@ def render_work(data: dict) -> str:
     out += f'''
 <main id="main">
   <section class="page-intro shell">
-    <div class="page-intro-code" aria-hidden="true">INDEX / 01—04<br>+ SELECTED WORK +</div>
+    <div class="page-intro-code" aria-hidden="true">SELECTED PHOTOGRAPHS<br>VOLUME 01</div>
+    <div class="section-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <p class="micro-label" data-reveal>{esc(work.get('eyebrow'))}</p>
     <h1 data-reveal>{esc(work.get('headline'))}</h1>
     <p class="page-intro-copy" data-reveal>{esc(work.get('intro'))}</p>
@@ -267,7 +246,8 @@ def render_category(data: dict, category: dict) -> str:
     out += f'''
 <main id="main">
   <section class="category-hero shell">
-    <div class="category-hero-top"><a class="back-link" href="/work/" data-reveal>← All work</a><span aria-hidden="true">FS.CAT / {esc(category.get('slug')).upper()}</span></div>
+    <div class="category-hero-top"><a class="back-link" href="/work/" data-reveal>← All work</a><span aria-hidden="true">ARCHIVE / {esc(category.get('slug')).upper()}</span></div>
+    <div class="section-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <p class="micro-label" data-reveal>{esc(category.get('eyebrow'))}</p>
     <h1 data-reveal>{esc(category.get('title'))}</h1>
     <p data-reveal>{esc(description)}</p>
@@ -296,6 +276,7 @@ def render_project(data: dict, category: dict, project: dict) -> str:
 <main id="main">
   <section class="project-hero shell">
     <a class="back-link" href="/work/{esc(category['slug'])}/">← {esc(category.get('title'))}</a>
+    <div class="section-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="project-heading">
       <div><p class="micro-label" data-reveal>{esc(project.get('kicker'))}</p><h1 data-reveal>{esc(project.get('title'))}</h1></div>
       <dl data-reveal><div><dt>Place</dt><dd>{esc(project.get('location'))}</dd></div><div><dt>Year</dt><dd>{esc(project.get('year'))}</dd></div><div><dt>Images</dt><dd>{len(project.get('photos', []))}</dd></div></dl>
@@ -319,6 +300,7 @@ def render_about(data: dict) -> str:
     out += f'''
 <main id="main" class="about-layout shell">
   <section class="about-copy">
+    <div class="section-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <p class="micro-label" data-reveal>{esc(about.get('eyebrow'))}</p>
     <h1 data-reveal>{esc(about.get('headline'))}</h1>
     <div class="about-body">{paragraphs}</div>
@@ -340,6 +322,7 @@ def render_inquire(data: dict) -> str:
     out += f'''
 <main id="main" class="inquire-layout shell">
   <section class="inquire-copy">
+    <div class="section-sigil" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <p class="micro-label" data-reveal>{esc(inquire.get('eyebrow'))}</p>
     <h1 data-reveal>{esc(inquire.get('headline'))}</h1>
     <p data-reveal>{esc(inquire.get('intro'))}</p>
@@ -428,8 +411,8 @@ def build(output: Path) -> None:
         "short_name": data["meta"].get("shortName", "FS"),
         "start_url": "/",
         "display": "standalone",
-        "background_color": "#0c0b10",
-        "theme_color": data["meta"].get("themeColorA", "#ff7448"),
+        "background_color": "#ffffff",
+        "theme_color": "#ffffff",
     }
     write_page(output, "site.webmanifest", json.dumps(manifest, indent=2))
 

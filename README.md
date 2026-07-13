@@ -7,7 +7,7 @@ A dependency-free photography portfolio with a local visual editor. The public w
 - A true one-screen landing page rather than a long homepage.
 - A touch-, wheel-, keyboard-, and button-accessible horizontal sequence showing several highlighted photographs immediately.
 - General positioning and a primary **See my work** action instead of graduation-first language.
-- Oversized masthead typography, sharp print geometry, ASCII/registration details, subtle grain, and acid/cobalt interface accents.
+- Oversized masthead typography, monochrome paper-and-ink styling, overlapping editorial frames, organic cybersigil linework, and an editable animated ASCII background.
 - Responsive type that wraps instead of clipping in narrow browsers.
 - A portfolio hierarchy modeled after Adobe Portfolio:
   - Work index
@@ -15,7 +15,7 @@ A dependency-free photography portfolio with a local visual editor. The public w
   - Individual shoot
   - Full shoot gallery and lightbox
 - Category and shoot covers are square; full shoot galleries retain **3:2 landscape** or **2:3 portrait** frames.
-- A browser-based editor for copy, button names, navigation, colors, featured homepage frames, categories, shoots, covers, and gallery photographs.
+- A browser-based editor for copy, button names, navigation, ASCII artwork, featured homepage frames, categories, shoots, covers, and gallery photographs.
 - Reduced-motion behavior, keyboard navigation, accessible lightbox controls, and visible focus states.
 
 ## Start the editor
@@ -43,7 +43,7 @@ There is nothing to install.
 - Header button names and destinations.
 - Landing-page headline, introduction, and both call-to-action buttons.
 - Featured homepage photos, labels, alt text, focus position, shape, and ordering.
-- Public theme colors.
+- Animated ASCII background artwork.
 - Work-page headline and introduction.
 - Category names, descriptions, covers, ordering, and URL slugs.
 - Individual shoot names, descriptions, locations, years, covers, and ordering.
@@ -77,7 +77,7 @@ python3 tools/check_site.py
 ```text
 content/site.json                All editable site content and portfolio data
 public/assets/site.css           Public visual design and responsive behavior
-public/assets/site.js            Horizontal sequence, menus, theme, lightbox, form
+public/assets/site.js            Horizontal sequence, ASCII animation, menus, lightbox, form
 public/assets/images/            Demo images and editor uploads
 tools/build_site.py              Static page generator
 tools/dev_server.py              Local editor and preview server

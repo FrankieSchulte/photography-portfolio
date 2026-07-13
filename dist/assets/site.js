@@ -1,15 +1,12 @@
 (() => {
   "use strict";
 
-  const documentElement = document.documentElement;
   const body = document.body;
   const config = window.PORTFOLIO_CONFIG || {};
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const themeKey = "frankie-portfolio-theme-v2";
   let menuReturnFocus = null;
-  let themeReturnFocus = null;
 
   function focusable(scope) {
     return $$('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])', scope)
@@ -31,7 +28,7 @@
     $('[data-mobile-menu]')?.setAttribute("aria-hidden", String(!open));
     if (open && !wasOpen) {
       menuReturnFocus = document.activeElement;
-      window.requestAnimationFrame(() => $('[data-mobile-menu] a')?.focus());
+      window.setTimeout(() => $('[data-mobile-menu] a')?.focus(), 40);
     } else if (!open && wasOpen && menuReturnFocus instanceof HTMLElement) {
       menuReturnFocus.focus();
     }
@@ -43,45 +40,32 @@
     $$('[data-mobile-menu] a').forEach((link) => link.addEventListener("click", () => setMenu(false)));
   }
 
-  function applyTheme(a, b, save = true) {
-    if (!a || !b) return;
-    documentElement.style.setProperty("--theme-a", a);
-    documentElement.style.setProperty("--theme-b", b);
-    const inputA = $('[data-color-a]');
-    const inputB = $('[data-color-b]');
-    if (inputA) inputA.value = a;
-    if (inputB) inputB.value = b;
-    if (save) {
-      try { localStorage.setItem(themeKey, JSON.stringify({ a, b })); } catch (_) { /* private mode */ }
-    }
-  }
-
-  function setThemePanel(open) {
-    const wasOpen = body.classList.contains("theme-open");
-    body.classList.toggle("theme-open", open);
-    $('[data-theme-panel]')?.setAttribute("aria-hidden", String(!open));
-    if (open && !wasOpen) {
-      themeReturnFocus = document.activeElement;
-      window.requestAnimationFrame(() => $('[data-theme-close]')?.focus());
-    } else if (!open && wasOpen && themeReturnFocus instanceof HTMLElement) {
-      themeReturnFocus.focus();
-    }
-  }
-
-  function initializeTheme() {
-    let saved = null;
-    try { saved = JSON.parse(localStorage.getItem(themeKey) || "null"); } catch (_) { saved = null; }
-    applyTheme(saved?.a || config.themeColorA || "#d8ff3e", saved?.b || config.themeColorB || "#4967ff", false);
-
-    $$('[data-theme-open]').forEach((button) => button.addEventListener("click", () => setThemePanel(true)));
-    $('[data-theme-close]')?.addEventListener("click", () => setThemePanel(false));
-    $('[data-theme-scrim]')?.addEventListener("click", () => setThemePanel(false));
-    $$('[data-theme-preset]').forEach((button) => {
-      button.addEventListener("click", () => applyTheme(button.dataset.a, button.dataset.b));
-    });
-    const custom = () => applyTheme($('[data-color-a]')?.value, $('[data-color-b]')?.value);
-    $('[data-color-a]')?.addEventListener("input", custom);
-    $('[data-color-b]')?.addEventListener("input", custom);
+  function initializeAsciiField() {
+    const output = $('[data-ascii-output]');
+    if (!output || reducedMotion.matches) return;
+    const source = output.textContent || "";
+    const shifting = [".", ":", "·", "+", "*", " "];
+    let tick = 0;
+    let timer = 0;
+    const draw = () => {
+      tick += 1;
+      let position = 0;
+      output.textContent = Array.from(source, (character) => {
+        position += 1;
+        if (!".:·+*".includes(character)) return character;
+        const index = (position * 3 + tick) % shifting.length;
+        return shifting[index];
+      }).join("");
+    };
+    const start = () => {
+      if (!timer) timer = window.setInterval(draw, 240);
+    };
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = 0;
+    };
+    document.addEventListener("visibilitychange", () => document.hidden ? stop() : start());
+    start();
   }
 
   function initializeReveals() {
@@ -285,11 +269,10 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         setMenu(false);
-        setThemePanel(false);
         return;
       }
       if (event.key !== "Tab") return;
-      const openSurface = body.classList.contains("menu-open") ? $('[data-mobile-menu]') : body.classList.contains("theme-open") ? $('[data-theme-panel]') : null;
+      const openSurface = body.classList.contains("menu-open") ? $('[data-mobile-menu]') : null;
       if (!openSurface) return;
       const nodes = focusable(openSurface);
       if (!nodes.length) return;
@@ -307,7 +290,7 @@
 
   initializeYear();
   initializeMenu();
-  initializeTheme();
+  initializeAsciiField();
   initializeReveals();
   initializeHomeRail();
   initializeCardMotion();
