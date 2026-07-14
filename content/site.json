@@ -2,12 +2,14 @@
   "meta": {
     "name": "Frankie Schulte",
     "shortName": "FS",
+    "footerAscii": "꧁⎝ 𓆩༺༻𓆪 ⎠꧂\n\n      ᕦ(ò_óˇ)ᕤ\n\n꧁⎛ 𓆩༺༻𓆪 ⎞꧂",
+    "footerAsciiLineHeight": 1,
     "role": "Photographer",
-    "location": "Your city / region",
-    "email": "your-email@example.com",
-    "instagramLabel": "@your-handle",
-    "instagramUrl": "#",
-    "siteDescription": "Photography by Frankie Schulte — portraits, events, live music, and personal work.",
+    "location": "Orange County Based",
+    "email": "frankiejschulte@gmail.com",
+    "instagramLabel": "@frankietography",
+    "instagramUrl": "https://www.instagram.com/frankietography/",
+    "siteDescription": "Frankie Schulte — an archive of bodies, light, movement, and temporary signals.",
     "demoMode": true,
     "noIndex": true
   },
@@ -26,78 +28,112 @@
     }
   ],
   "home": {
-    "eyebrow": "Independent image-maker / selected works",
+    "eyebrow": "Independent image-maker / selected afterimages",
     "headline": "Frankie Schulte",
-    "intro": "Portraits, live energy, strange light, and the places between.",
+    "intro": "Light passes through the body. The image keeps what the moment leaves behind.",
     "primaryCta": {
-      "label": "See my work",
+      "label": "View the archive",
       "href": "/work/"
     },
     "secondaryCta": {
-      "label": "Start a project",
+      "label": "Make contact",
       "href": "/inquire/"
     },
     "exploreLabel": "Scroll the contact sheet",
-    "asciiArt": "              .        .\n         .:::/\\______/\\:::.\n      .:/   /  /\\  /\\  \\   \\:.\n     <    <   <  \\/  >   >    >\n      ':\\___\\__/\\__/___/:'\n          /_/  /  \\  \\_\\\n        .:'   /____\\   ':.",
+    "asciiArt": "⠀⠀⣠⣴⣾⡿⠟⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⢂⠀⠐⠠⡀⠀⠀⠀⠀⠀⠀⠀\n⢠⣾⡿⠛⠁⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠑⠚⠃⠀⠀⠈⠢⠀⠀⠀⠀⠀⠀\n⣾⣿⠁⠀⠀⠀⠀⡐⠁⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢃⠀⠀⠀⠀⠀\n⡟⣿⡀⠀⠀⠀⠀⠡⡀⠀⠀⠀⠀⢰⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⢘⠀⠀⠀⠀⠀\n⠸⡜⢿⣄⠀⠀⠀⠀⠀⠀⠀⠀⢀⠎⠀⠀⣄⣠⣾⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀\n⠀⠘⢆⠻⢿⡶⠤⢤⣤⠤⠤⠖⠁⠀⠀⠀⢸⣿⡏⠀⠀⠀⠀⣠⠃⠀⠀⠀⠀⠀\n⠀⠀⠈⠳⣄⡙⠷⡢⢄⣀⠀⠀⠀⠀⠀⢀⡼⠏⠀⠀⠀⣠⠔⠁⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠈⠻⣦⡈⠑⠦⣉⠙⠛⠋⠉⠁⠀⠒⠒⠈⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠹⣷⡄⠀⠀⠙⢲⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⢹⣿⡄⠀⠀⠀⠑⢍⠲⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⠀⠀⠀⠀⠀⠑⢄⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⣰⣿⡿⠀⠀⠀⠀⠀⠀⠀⠡⠀⠙⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠰⣶⣶⣾⠟⠁⠀⠀⠀⢀⣠⣤⠄⠀⠀⢡⠀⠈⢧⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠋⠀⠀⠀⠀⢸⠀⠀⠈⣇⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⢀⡠⠤⠀⠤⠄⡀⠀⠘⣧⠀⠀⠀⠀⢠⠇⠀⠀⠀⢻⠀⠀⠀⠀⠀⠀⠀\n⠀⢀⠖⠁⠀⠀⠀⠀⠀⠈⠢⡀⠙⠳⠶⠶⠚⠁⠀⠀⠀⠀⡾⠀⠀⠀⠀⠀⠀⠀\n⢀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠇⠀⠀⠀⠀⠀⠀⠀\n⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⠀⢠⠏⠀⠀⠀⠀⠀⠀⠀⠀\n⢸⠀⠀⠀⠀⠀⠀⡰⣶⡄⠀⠌⠀⠀⠀⠀⠀⠀⠀⣴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⢣⠀⠀⠀⠀⠀⠐⠭⠐⠈⠀⠀⠀⠀⠀⢀⣠⣾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⣰⢟⢿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠑⠢⠤⢀⣀⡀⠤⠔⠂⢡⠞⣡⠏⡎⠰⣤⡄⠀⠀⠀⠀⠠⠔⠂⢄⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠁⣰⠃⢀⠀⠀⠉⠓⠂⠀⠀⠀⠱⠿⠇⠀⠢\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡞⠀⣰⡏⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠀⢀⣿⠀⠀⠀⠱⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠁⠀⠈⣿⡀⠀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⢀⠄⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠈⠃⠀⠀⠀⠀⠀⠈⠐⠂⠠⠄⠐⠂⠁⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡆⠀⠀⠀⠀⠀⠀⠀⠀⠈⢲⣄⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡆⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⡀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⢄⡀⠀⠀⢀⠀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀",
+    "twinkleFrequency": 5,
+    "twinkleAmount": 16,
+    "twinkleDuration": 1600,
+    "twinkleBrightness": 50,
     "heroSlides": [
       {
         "src": "/assets/images/highlights/high-desert-portrait.webp",
-        "alt": "A person in black clothing and sunglasses seated beneath a Joshua tree against a vivid blue sky.",
+        "alt": "",
         "position": "50% 45%",
         "orientation": "portrait",
-        "label": "High desert / portrait"
+        "label": "Joshua Tree / portrait",
+        "href": "/work/portraits-graduation/late-light-portraits-demo/"
       },
       {
         "src": "/assets/images/highlights/carter-submerged.webp",
-        "alt": "An underwater portrait in luminous blue water with the subject reaching toward the surface.",
+        "alt": "",
         "position": "50% 50%",
         "orientation": "portrait",
-        "label": "Submerged / portrait"
+        "label": "MIT LIVE Submerged / portrait",
+        "href": "/work/personal-travel/roads-between-demo/"
       },
       {
         "src": "/assets/images/highlights/fire-spinning.webp",
-        "alt": "A fire performer surrounded by sweeping rings of flame during a long exposure.",
+        "alt": "",
         "position": "50% 50%",
         "orientation": "landscape",
-        "label": "Fire study / motion"
+        "label": "MIT Firespinning / motion",
+        "href": "/work/events/evening-gathering-demo/"
       },
       {
         "src": "/assets/images/highlights/kevin-live-color.webp",
-        "alt": "A guitarist performing beneath a dramatic rainbow beam of stage light.",
+        "alt": "",
         "position": "45% 50%",
         "orientation": "portrait",
-        "label": "Live color / performance"
+        "label": "MIT LIVE In Color / performance",
+        "href": "/work/concerts/live-room-demo/"
       },
       {
         "src": "/assets/images/highlights/palm-phone-duo.webp",
-        "alt": "Two people seated in a palm grove with a white telephone placed between them.",
+        "alt": "",
         "position": "50% 58%",
         "orientation": "square",
-        "label": "Palm study / duo"
+        "label": "Miss Not Ma'am  / duo",
+        "href": "/work/personal-travel/coastline-demo/"
+      },
+      {
+        "src": "",
+        "alt": "",
+        "position": "50% 50%",
+        "orientation": "square",
+        "label": "New square frame",
+        "href": "/work/"
+      },
+      {
+        "src": "",
+        "alt": "",
+        "position": "50% 50%",
+        "orientation": "landscape",
+        "label": "New horizontal frame",
+        "href": "/work/"
+      },
+      {
+        "src": "",
+        "alt": "",
+        "position": "50% 50%",
+        "orientation": "portrait",
+        "label": "New vertical frame",
+        "href": "/work/"
       }
     ]
   },
   "work": {
-    "eyebrow": "Selected work",
-    "headline": "People, energy, and place.",
-    "intro": "Browse by kind of work, then open an individual shoot to see the full sequence. The categories can grow and change as the portfolio does."
+    "eyebrow": "Selected Afterimages",
+    "headline": "Photos ",
+    "intro": "Organized by subject, though never entirely by logic. Enter each sequence as evidence of something already gone—bodies, rooms, and passing light held briefly in place."
   },
   "about": {
     "eyebrow": "About",
-    "headline": "I care about how a moment felt—not only how it looked.",
+    "headline": "I photograph what remains after the moment loses its name.",
     "body": [
-      "Hi, I’m Frankie. I make photographs of people, gatherings, performances, and the places I find along the way.",
-      "My approach is observant and collaborative. I’ll give direction when it helps, step back when the moment already has everything it needs, and keep the experience relaxed enough for people to feel like themselves."
+      "Hi, I’m Frankie. I make photographs of people, gatherings, performances, and the places I move through. I’m drawn to the point where an ordinary moment begins to feel unfamiliar—when light changes the body and the image becomes something more than evidence.",
+      "My approach is observant and collaborative. I give direction when it creates an opening, then step back when the moment begins to speak for itself. The goal is not to make everything perfect, but to leave enough space for something honest, strange, and impossible to repeat."
     ],
     "portrait": "/assets/images/demo/graduation-01.jpg",
     "portraitAlt": "Temporary demo portrait; replace with a photograph of Frankie.",
-    "availability": "Available for portraits, graduations, events, concerts, editorial work, and select creative projects."
+    "availability": "Available for portraits, graduations, events, concerts, editorial commissions, and select experiments in visual translation."
   },
   "inquire": {
     "eyebrow": "Inquire",
     "headline": "Tell me what you’re making.",
-    "intro": "A date, location, and a little context are enough to start. I’ll reply from my regular email so we can figure out the rest together.",
-    "buttonLabel": "Prepare email",
+    "intro": "Send a date, location, and a fragment of what you are imagining. That is enough to begin. I’ll reply from my regular email so we can give the idea a shape.",
+    "formEndpoint": "https://formspree.io/f/mkodgpbv",
+    "buttonLabel": "Send inquiry",
     "projectTypes": [
       "Portrait or graduation",
       "Event",
@@ -113,7 +149,7 @@
       "title": "Portraits & Graduation",
       "shortTitle": "Portraits",
       "eyebrow": "People / milestones",
-      "intro": "Portraits that feel considered without feeling over-directed—from graduation sessions to personal and editorial work.",
+      "intro": "A face enters the frame and returns slightly altered. Portraits of presence, transition, and the private distance between being seen and being known.",
       "cover": {
         "src": "/assets/images/demo/graduation-02.jpg",
         "alt": "Graduation portrait used as temporary demo work.",
@@ -193,7 +229,7 @@
       "title": "Events",
       "shortTitle": "Events",
       "eyebrow": "Gatherings / celebrations",
-      "intro": "The room, the people, the details, and the small moments around the planned ones.",
+      "intro": "Rooms gather their own weather. These photographs follow the gestures, details, and brief collisions that survive after the gathering disappears.",
       "cover": {
         "src": "/assets/images/demo/event-01.jpg",
         "alt": "Guests gathered during an evening event.",
@@ -279,7 +315,7 @@
       "title": "Concerts",
       "shortTitle": "Concerts",
       "eyebrow": "Live music / low light",
-      "intro": "Performers, crowds, stage light, and the energy around a room while it is happening.",
+      "intro": "Bodies assemble beneath manufactured suns. Sound becomes movement, movement becomes evidence, and the room leaves behind a temporary mythology of its own.",
       "cover": {
         "src": "/assets/images/demo/hero-concert.jpg",
         "alt": "Band performing beneath stage lights.",
@@ -359,7 +395,7 @@
       "title": "Personal / Travel",
       "shortTitle": "Personal",
       "eyebrow": "Places / observations",
-      "intro": "Photographs made without a client or shot list—the quieter part of how I learn to notice.",
+      "intro": "Places observed after they have stopped explaining themselves—quiet studies of distance, atmosphere, and the things that appear when no one has asked for an image.",
       "cover": {
         "src": "/assets/images/demo/travel-01.jpg",
         "alt": "Rocky coast and turquoise water.",

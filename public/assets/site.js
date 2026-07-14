@@ -41,24 +41,77 @@
   }
 
   function initializeAsciiField() {
-    const output = $('[data-ascii-output]');
-    if (!output || reducedMotion.matches) return;
-    const source = output.textContent || "";
-    const shifting = [".", ":", "·", "+", "*", " "];
-    let tick = 0;
+    const outputs = $$('[data-ascii-output], [data-ascii-mirror]');
+    if (!outputs.length) return;
+    const glyphSets = [];
+    outputs.forEach((output) => {
+      const fragment = document.createDocumentFragment();
+      const glyphs = [];
+      Array.from(output.textContent || "").forEach((character) => {
+        if (/\s/.test(character)) {
+          fragment.append(document.createTextNode(character));
+          return;
+        }
+        const codePoint = character.codePointAt(0);
+        if (codePoint >= 0x2800 && codePoint <= 0x28ff) {
+          const cell = document.createElement("span");
+          cell.className = "ascii-glyph braille-cell";
+          cell.setAttribute("aria-hidden", "true");
+          const mask = codePoint - 0x2800;
+          for (let dot = 1; dot <= 8; dot += 1) {
+            if (!(mask & (1 << (dot - 1)))) continue;
+            const mark = document.createElement("i");
+            mark.className = `braille-dot braille-dot-${dot}`;
+            cell.append(mark);
+          }
+          fragment.append(cell);
+          glyphs.push(cell);
+          return;
+        }
+        const glyph = document.createElement("span");
+        glyph.className = "ascii-glyph";
+        glyph.textContent = character;
+        fragment.append(glyph);
+        glyphs.push(glyph);
+      });
+      output.replaceChildren(fragment);
+      glyphSets.push(glyphs);
+    });
+    const glyphCount = Math.max(0, ...glyphSets.map((glyphs) => glyphs.length));
+    const glyphGroups = Array.from({ length: glyphCount }, (_, index) => glyphSets.map((glyphs) => glyphs[index]).filter(Boolean));
+    const frequency = Math.max(1, Math.min(30, Number(config.twinkleFrequency) || 8));
+    const amount = Math.max(1, Math.min(80, Number(config.twinkleAmount) || 16));
+    const duration = Math.max(100, Math.min(5000, Number(config.twinkleDuration) || 4800));
+    const brightness = Math.max(.2, Math.min(1, (Number(config.twinkleBrightness) || 60) / 100));
+    document.documentElement.style.setProperty("--twinkle-brightness", brightness.toFixed(2));
+    if (reducedMotion.matches || !glyphGroups.length) return;
+    const order = glyphGroups.map((_, index) => index);
+    let seed = 19790423;
+    for (let index = order.length - 1; index > 0; index -= 1) {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      const target = seed % (index + 1);
+      [order[index], order[target]] = [order[target], order[index]];
+    }
+    const active = new Map();
+    let cursor = 0;
     let timer = 0;
-    const draw = () => {
-      tick += 1;
-      let position = 0;
-      output.textContent = Array.from(source, (character) => {
-        position += 1;
-        if (!".:·+*".includes(character)) return character;
-        const index = (position * 3 + tick) % shifting.length;
-        return shifting[index];
-      }).join("");
+    const twinkle = () => {
+      const now = performance.now();
+      active.forEach((expiresAt, glyphIndex) => {
+        if (expiresAt > now) return;
+        glyphGroups[glyphIndex].forEach((glyph) => glyph.classList.remove("is-twinkling"));
+        active.delete(glyphIndex);
+      });
+      const count = Math.min(amount, order.length);
+      for (let index = 0; index < count; index += 1) {
+        const glyphIndex = order[cursor];
+        cursor = (cursor + 1) % order.length;
+        active.set(glyphIndex, now + duration);
+        glyphGroups[glyphIndex].forEach((glyph) => glyph.classList.add("is-twinkling"));
+      }
     };
     const start = () => {
-      if (!timer) timer = window.setInterval(draw, 240);
+      if (!timer) timer = window.setInterval(twinkle, Math.round(1000 / frequency));
     };
     const stop = () => {
       window.clearInterval(timer);
@@ -88,43 +141,71 @@
   function initializeHomeRail() {
     const rail = $('[data-home-rail]');
     if (!rail) return;
-    const items = $$('[data-home-feature]', rail);
-    const count = $('[data-rail-count]');
+    const spread = $('[data-home-spread]', rail);
+    const group = $('[data-home-loop-group]', rail);
+    if (!spread || !group) return;
+    const before = group.cloneNode(true);
+    const after = group.cloneNode(true);
+    [before, after].forEach((clone) => {
+      clone.removeAttribute("data-home-loop-group");
+      clone.classList.add("is-loop-clone");
+      clone.setAttribute("aria-hidden", "true");
+      $$('a', clone).forEach((link) => link.setAttribute("tabindex", "-1"));
+    });
+    spread.prepend(before);
+    spread.append(after);
     const behavior = reducedMotion.matches ? "auto" : "smooth";
-    let frame = 0;
-    let dragging = false;
-    let startX = 0;
-    let startScroll = 0;
+    let autoFrame = 0;
+    let lastAutoTime = 0;
+    let pausedUntil = performance.now() + 1800;
+    let cycleStart = 0;
+    let cycleWidth = 0;
+    let resizeFrame = 0;
+    let scrollFrame = 0;
 
-    const currentIndex = () => {
-      const leadingEdge = rail.scrollLeft + Math.min(48, rail.clientWidth * .12);
-      let nearest = 0;
-      let distance = Number.POSITIVE_INFINITY;
-      items.forEach((item, index) => {
-        const nextDistance = Math.abs(leadingEdge - item.offsetLeft);
-        if (nextDistance < distance) {
-          distance = nextDistance;
-          nearest = index;
-        }
-      });
-      return nearest;
+    const pauseAuto = (duration = 4500) => {
+      pausedUntil = Math.max(pausedUntil, performance.now() + duration);
     };
 
-    const updateCount = () => {
-      frame = 0;
-      if (count) count.textContent = `${String(currentIndex() + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}`;
+    const normalize = () => {
+      if (cycleWidth <= 1) return;
+      const relative = rail.scrollLeft - cycleStart;
+      if (relative < 0) rail.scrollLeft += cycleWidth;
+      else if (relative >= cycleWidth) rail.scrollLeft -= cycleWidth;
     };
-    const scheduleCount = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(updateCount);
+
+    const measure = () => {
+      const previousWidth = cycleWidth;
+      const previousProgress = previousWidth > 1 ? (rail.scrollLeft - cycleStart) / previousWidth : 0;
+      cycleStart = group.offsetLeft;
+      cycleWidth = after.offsetLeft - group.offsetLeft;
+      rail.scrollLeft = cycleStart + Math.max(0, Math.min(1, previousProgress)) * cycleWidth;
     };
+
     const move = (amount) => {
+      pauseAuto();
       rail.scrollBy({ left: amount * Math.max(240, rail.clientWidth * .72), behavior });
     };
 
-    $('[data-rail-prev]')?.addEventListener("click", () => move(-1));
-    $('[data-rail-next]')?.addEventListener("click", () => move(1));
-    rail.addEventListener("scroll", scheduleCount, { passive: true });
+    const autoScroll = (time) => {
+      if (!lastAutoTime) lastAutoTime = time;
+      const elapsed = Math.min(time - lastAutoTime, 40);
+      lastAutoTime = time;
+      const focusPaused = rail.matches(":focus-within");
+      if (!document.hidden && !focusPaused && time >= pausedUntil && cycleWidth > 1) {
+        rail.scrollLeft += elapsed * .012;
+        normalize();
+      }
+      autoFrame = window.requestAnimationFrame(autoScroll);
+    };
+
+    rail.addEventListener("scroll", () => {
+      if (scrollFrame) return;
+      scrollFrame = window.requestAnimationFrame(() => {
+        scrollFrame = 0;
+        normalize();
+      });
+    }, { passive: true });
     rail.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         event.preventDefault();
@@ -134,27 +215,17 @@
     rail.addEventListener("wheel", (event) => {
       if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
       event.preventDefault();
+      pauseAuto();
       rail.scrollLeft += event.deltaY;
     }, { passive: false });
-    rail.addEventListener("pointerdown", (event) => {
-      if (event.pointerType !== "mouse" || event.button !== 0) return;
-      dragging = true;
-      startX = event.clientX;
-      startScroll = rail.scrollLeft;
-      rail.classList.add("is-dragging");
-      rail.setPointerCapture(event.pointerId);
+    window.addEventListener("resize", () => {
+      window.cancelAnimationFrame(resizeFrame);
+      resizeFrame = window.requestAnimationFrame(measure);
     });
-    rail.addEventListener("pointermove", (event) => {
-      if (!dragging) return;
-      rail.scrollLeft = startScroll - (event.clientX - startX);
-    });
-    const stopDrag = () => {
-      dragging = false;
-      rail.classList.remove("is-dragging");
-    };
-    rail.addEventListener("pointerup", stopDrag);
-    rail.addEventListener("pointercancel", stopDrag);
-    updateCount();
+    window.requestAnimationFrame(measure);
+    document.fonts?.ready.then(measure);
+    if (!reducedMotion.matches) autoFrame = window.requestAnimationFrame(autoScroll);
+    window.addEventListener("pagehide", () => window.cancelAnimationFrame(autoFrame), { once: true });
   }
 
   function initializeCardMotion() {
@@ -245,23 +316,36 @@
     const form = $('[data-inquiry-form]');
     if (!form) return;
     const status = $('[data-form-status]', form);
-    form.addEventListener("submit", (event) => {
+    const button = $('button[type="submit"]', form);
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!form.reportValidity()) return;
-      const values = new FormData(form);
-      const lines = [
-        `Name: ${values.get("name")}`,
-        `Email: ${values.get("email")}`,
-        `Project type: ${values.get("projectType")}`,
-        `Date / timeline: ${values.get("timeline") || "Not provided"}`,
-        `Location: ${values.get("location") || "Not provided"}`,
-        "",
-        "Project details:",
-        String(values.get("details") || "")
-      ];
-      const subject = `Photography inquiry — ${values.get("projectType")}`;
-      window.location.href = `mailto:${config.email || ""}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
-      if (status) status.textContent = "Your email app should open with these details filled in. Review the draft, then send it when you’re ready.";
+      const endpoint = String(form.dataset.formEndpoint || "").trim();
+      if (!endpoint) {
+        if (status) status.textContent = "Direct delivery still needs a Formspree endpoint. Add it in the local editor under About & inquiry.";
+        return;
+      }
+      const values = Object.fromEntries(new FormData(form).entries());
+      values.subject = `Photography inquiry — ${values.projectType || "New project"}`;
+      form.setAttribute("aria-busy", "true");
+      if (button) button.disabled = true;
+      if (status) status.textContent = "Sending your inquiry…";
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(values)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.success === false || result.success === "false") throw new Error(result.message || "The message could not be sent.");
+        form.reset();
+        if (status) status.textContent = "Your inquiry is on its way. Thank you — I’ll be in touch soon.";
+      } catch (error) {
+        if (status) status.textContent = `Something interrupted the send. Please email ${config.email || "me"} directly.`;
+      } finally {
+        form.removeAttribute("aria-busy");
+        if (button) button.disabled = false;
+      }
     });
   }
 

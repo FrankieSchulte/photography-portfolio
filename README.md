@@ -5,9 +5,9 @@ A dependency-free photography portfolio with a local visual editor. The public w
 ## What this revision changes
 
 - A true one-screen landing page rather than a long homepage.
-- A touch-, wheel-, keyboard-, and button-accessible horizontal sequence showing several highlighted photographs immediately.
+- A touch-, wheel-, and keyboard-accessible looping horizontal sequence showing several highlighted photographs immediately.
 - General positioning and a primary **See my work** action instead of graduation-first language.
-- Oversized masthead typography, monochrome paper-and-ink styling, overlapping editorial frames, organic cybersigil linework, and an editable animated ASCII background.
+- Oversized masthead typography, a paper-and-ink interface, overlapping color editorial frames, and an editable full-height animated ASCII/Braille background.
 - Responsive type that wraps instead of clipping in narrow browsers.
 - A portfolio hierarchy modeled after Adobe Portfolio:
   - Work index
@@ -42,8 +42,8 @@ There is nothing to install.
 - Photographer name, role, location, email, and Instagram.
 - Header button names and destinations.
 - Landing-page headline, introduction, and both call-to-action buttons.
-- Featured homepage photos, labels, alt text, focus position, shape, and ordering.
-- Animated ASCII background artwork.
+- Featured homepage photos, shoot destinations, labels, alt text, focus position, shape, and ordering.
+- Animated raised-dot Braille/ASCII background artwork with editable twinkle controls and unrestricted centered footer artwork.
 - Work-page headline and introduction.
 - Category names, descriptions, covers, ordering, and URL slugs.
 - Individual shoot names, descriptions, locations, years, covers, and ordering.
@@ -176,7 +176,7 @@ The included content is still a clearly marked demonstration. Before indexing th
 4. Add accurate alt text and captions.
 5. In the editor, turn **Demo mode** off.
 6. Turn **Block search engines** off.
-7. Confirm the email draft opens with the correct recipient.
+7. Create a form at Formspree, copy its `https://formspree.io/f/...` endpoint into **About & inquiry → Formspree endpoint**, save, then send a test inquiry and confirm it reaches the correct inbox.
 8. Add your real domain to Nginx and enable HTTPS through your reverse proxy or Certbot.
 
 No clients, artists, venues, testimonials, prices, or credentials should be published unless they are real and approved.

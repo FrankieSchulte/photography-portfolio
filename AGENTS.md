@@ -24,10 +24,11 @@ python3 tools/check_site.py
 - The primary home action stays generalized rather than graduation- or concert-specific.
 - The portfolio hierarchy is Work → Category → Shoot → Gallery.
 - Work-category and shoot-cover frames are square for a consistent index. Full gallery photographs remain 3:2 landscape or 2:3 portrait.
-- Preserve the monochrome white-paper/black-ink system, animated ASCII marks, organic cybersigil linework, and layered fashion-editorial composition. Photography remains dominant.
+- Preserve the white-paper/black-ink interface, full-height animated Braille/ASCII background, color photography, and layered fashion-editorial composition. Photography remains dominant.
+- Do not reintroduce the radial sigil/star decorations. The site-wide decorative language now comes from editable text artwork.
 - Preserve the organic late-Y2K fashion-magazine direction. Avoid digital control-panel styling, neon accent colors, generic card dashboards, excessive glass effects, fake credentials, fake clients, and AI-sounding marketing copy.
 - Copy should sound personal, direct, and first-person.
-- Preserve keyboard access, visible focus, reduced motion, semantic headings, useful alt text, and the truthful mail-draft inquiry behavior.
+- Preserve keyboard access, visible focus, reduced motion, semantic headings, useful alt text, and the direct-send inquiry form with honest success/error feedback.
 - The local editor must never be copied into `dist/` or publicly deployed.
 - Keep the toolchain install-free and bounded; do not add an `npm install` requirement.
 
